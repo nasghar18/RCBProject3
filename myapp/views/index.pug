@@ -1,0 +1,36 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title FightNight
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://code.createjs.com/easeljs-0.8.2.min.js')
+    script(src='https://code.createjs.com/tweenjs-0.6.2.min.js')
+    script(src='https://code.createjs.com/preloadjs-0.6.1.min.js')
+  body(onload='init();', tabindex='0')
+    // For Easel.js
+    #title.flexRow
+      h1.insetShadow
+        | Fight Night
+        h1
+    // Content area
+    .flexRow
+      .statsLeft
+        h3 Kahoona
+        p#player1_hp HP 30
+        p#player1_stats
+      div
+        canvas#testCanvas(width='800', height='500')
+      .statsRight
+        h3 Enemy1
+        p#enemy1_hp HP 30
+        p#enemy1_stats
+    // Instructions
+    .center.getFocus
+      .btn(onclick="document.body.style.background = '#222'; getElementById('getFocus').style.display = 'none'; getElementById('title').style.display = 'none';")
+        h2#getFocus Start
+      p
+        | W A S D or Arrow Keys to move |
+        b Spacebar
+        |  to attack
+    script(src='/javascripts/boxing.js')
