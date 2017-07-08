@@ -24,243 +24,252 @@ function playpunch(){
 	audio.play();
 }
 
+function GameSet() {
 
-function init() {
-  stage = new createjs.Stage(document.getElementById("testCanvas"));
-  w = stage.canvas.width;
-  h = stage.canvas.height;
- 
+	function init() {
+	  stage = new createjs.Stage(document.getElementById("testCanvas"));
+	  w = stage.canvas.width;
+	  h = stage.canvas.height;
+	 
 
-  //load assets
-  loader = new createjs.LoadQueue(false);
-  loader.on("complete", handleComplete, this);
-  loader.crossOrigin = "";
-  loader.loadFile({id:"player", src:spriteSheetKahoona});
-  loader.loadFile({id:"cpu1", src:spriteSheetNinja1});
-  loader.loadFile({id:"cpu2", src:spriteSheetNinja2});
-  loader.loadFile({id:"cpu3", src:spriteSheetNinja3});
-  loader.loadFile({id:"cpu4", src:spriteSheetNinja4});
-  loader.loadFile({id:"cpu5", src:spriteSheetNinja5});
+	  //load assets
+	  loader = new createjs.LoadQueue(false);
+	  loader.on("complete", handleComplete, this);
+	  loader.crossOrigin = "";
+	  loader.loadFile({id:"player", src:spriteSheetKahoona});
+	  loader.loadFile({id:"cpu1", src:spriteSheetNinja1});
+	  loader.loadFile({id:"cpu2", src:spriteSheetNinja2});
+	  loader.loadFile({id:"cpu3", src:spriteSheetNinja3});
+	  loader.loadFile({id:"cpu4", src:spriteSheetNinja4});
+	  loader.loadFile({id:"cpu5", src:spriteSheetNinja5});
+	}
+
+	 function handleComplete(evt) {
+	        
+			// Define a spritesheet. Note that this data was exported by Zoë.
+			var spriteSheet = new createjs.SpriteSheet({
+					framerate: 7,
+					"images": [loader.getResult("player")],
+					"frames":{
+						//original w:250 h:125
+					    "width": 250,
+					    "regY": 1,
+					    "height": 125,
+					    "regX": -1,
+					    "count": 27
+					},
+					//count 188 is how many moves are on each sprite page
+					// define two animations, run (loops, 1.5x speed) and jump (returns to run):
+				//Levi is my character's name	
+	      "animations":{
+
+
+	      				// "Ready": [0, 1, "Ready"],
+
+					    "Melee": [2, 3, "Ready"],
+					    "Damage": [24, 25, "Ready"],
+					    "Running": [0, 1, "LeviRunCycle"],
+					    "LeviRunCycle": [0, 1, "LeviRunCycle"],
+					    "LeviWalk": [0, 1, "LeviWalkCycle"],
+					    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
+					    "Tired": [24, 26],
+					    "Miss": [18, 19, "Ready"],
+					    "Dodge": [18, 19, "Ready"],
+					    "Ready": [0, 1, "Ready"],
+	            "TakeHit": [23, 24, "Damage"],
+	            "Parry": [16, 17, "Dodge"]
+					}
+				});
+
+			// Define a spritesheet. Note that this data was exported by Zoë.
+			var spriteSheet1 = new createjs.SpriteSheet({
+					framerate: 7,
+					"images": [loader.getResult("cpu1")],
+					"frames":{
+					    "width": 250,
+					    "regY": 1,
+					    "height": 125,
+					    "regX": -1,
+					    "count": 27
+					},
+					//count 188 is how many moves are on each sprite page
+					// define two animations, run (loops, 1.5x speed) and jump (returns to run):
+				//Levi is my character's name	
+	      "animations":{
+
+
+	      				// "Ready": [0, 1, "Ready"],
+
+					    "Melee": [2, 3, "Ready"],
+					    "Damage": [24, 25, "Ready"],
+					    "Running": [0, 1, "LeviRunCycle"],
+					    "LeviRunCycle": [0, 1, "LeviRunCycle"],
+					    "LeviWalk": [0, 1, "LeviWalkCycle"],
+					    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
+					    "Tired": [24, 26],
+					    "Miss": [18, 19, "Ready"],
+					    "Dodge": [18, 19, "Ready"],
+					    "Ready": [0, 1, "Ready"],
+	            "TakeHit": [23, 24, "Damage"],
+	            "Parry": [16, 17, "Dodge"]
+					}
+				});
+			var spriteSheet2 = new createjs.SpriteSheet({
+					framerate: 7,
+					"images": [loader.getResult("cpu2")],
+					"frames":{
+					    "width": 250,
+					    "regY": 1,
+					    "height": 125,
+					    "regX": -1,
+					    "count": 27
+					},
+					//count 188 is how many moves are on each sprite page
+					// define two animations, run (loops, 1.5x speed) and jump (returns to run):
+				//Levi is my character's name	
+	      "animations":{
+
+
+	      				// "Ready": [0, 1, "Ready"],
+
+					    "Melee": [2, 3, "Ready"],
+					    "Damage": [24, 25, "Ready"],
+					    "Running": [0, 1, "LeviRunCycle"],
+					    "LeviRunCycle": [0, 1, "LeviRunCycle"],
+					    "LeviWalk": [0, 1, "LeviWalkCycle"],
+					    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
+					    "Tired": [24, 26],
+					    "Miss": [18, 19, "Ready"],
+					    "Dodge": [18, 19, "Ready"],
+					    "Ready": [0, 1, "Ready"],
+	            "TakeHit": [23, 24, "Damage"],
+	            "Parry": [16, 17, "Dodge"]
+					}
+				});
+			var spriteSheet3 = new createjs.SpriteSheet({
+					framerate: 7,
+					"images": [loader.getResult("cpu3")],
+					"frames":{
+					    "width": 250,
+					    "regY": 1,
+					    "height": 125,
+					    "regX": -1,
+					    "count": 27
+					},
+					//count 188 is how many moves are on each sprite page
+					// define two animations, run (loops, 1.5x speed) and jump (returns to run):
+				//Levi is my character's name	
+	      "animations":{
+
+
+	      				// "Ready": [0, 1, "Ready"],
+
+					    "Melee": [2, 3, "Ready"],
+					    "Damage": [24, 25, "Ready"],
+					    "Running": [0, 1, "LeviRunCycle"],
+					    "LeviRunCycle": [0, 1, "LeviRunCycle"],
+					    "LeviWalk": [0, 1, "LeviWalkCycle"],
+					    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
+					    "Tired": [24, 26],
+					    "Miss": [18, 19, "Ready"],
+					    "Dodge": [18, 19, "Ready"],
+					    "Ready": [0, 1, "Ready"],
+	            "TakeHit": [23, 24, "Damage"],
+	            "Parry": [16, 17, "Dodge"]
+					}
+				});
+			var spriteSheet4 = new createjs.SpriteSheet({
+					framerate: 7,
+					"images": [loader.getResult("cpu4")],
+					"frames":{
+					    "width": 250,
+					    "regY": 1,
+					    "height": 125,
+					    "regX": -1,
+					    "count": 27
+					},
+					//count 188 is how many moves are on each sprite page
+					// define two animations, run (loops, 1.5x speed) and jump (returns to run):
+				//Levi is my character's name	
+	      "animations":{
+
+
+	      				// "Ready": [0, 1, "Ready"],
+
+					    "Melee": [2, 3, "Ready"],
+					    "Damage": [24, 25, "Ready"],
+					    "Running": [0, 1, "LeviRunCycle"],
+					    "LeviRunCycle": [0, 1, "LeviRunCycle"],
+					    "LeviWalk": [0, 1, "LeviWalkCycle"],
+					    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
+					    "Tired": [24, 26],
+					    "Miss": [18, 19, "Ready"],
+					    "Dodge": [18, 19, "Ready"],
+					    "Ready": [0, 1, "Ready"],
+	            "TakeHit": [23, 24, "Damage"],
+	            "Parry": [16, 17, "Dodge"]
+					}
+				});
+			var spriteSheet5 = new createjs.SpriteSheet({
+					framerate: 7,
+					"images": [loader.getResult("cpu5")],
+					"frames":{
+					    "width": 250,
+					    "regY": 1,
+					    "height": 125,
+					    "regX": -1,
+					    "count": 27
+					},
+					//count 188 is how many moves are on each sprite page
+					// define two animations, run (loops, 1.5x speed) and jump (returns to run):
+				//Levi is my character's name	
+	      "animations":{
+
+
+	      				// "Ready": [0, 1, "Ready"],
+
+					    "Melee": [2, 3, "Ready"],
+					    "Damage": [24, 25, "Ready"],
+					    "Running": [0, 1, "LeviRunCycle"],
+					    "LeviRunCycle": [0, 1, "LeviRunCycle"],
+					    "LeviWalk": [0, 1, "LeviWalkCycle"],
+					    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
+					    "Tired": [24, 26],
+					    "Miss": [18, 19, "Ready"],
+					    "Dodge": [18, 19, "Ready"],
+					    "Ready": [0, 1, "Ready"],
+	            "TakeHit": [23, 24, "Damage"],
+	            "Parry": [16, 17, "Dodge"]
+					}
+				});
+	var randChar = [spriteSheet1, spriteSheet2, spriteSheet3, spriteSheet4, spriteSheet5];
+
+			console.log(randChar[Math.floor( Math.random() * (5-0) + 0 )]);
+
+			player = new createjs.Sprite(spriteSheet, "Ready");
+			player.x = 150;
+			player.y = 225;
+
+
+	   
+	   npc = new createjs.Sprite(randChar[Math.floor( Math.random() * (5-0) + 0 )], "Ready");
+	   npc.x =625;
+	   npc.y = 175;
+	   npc.scaleX *= -1;
+
+			// Add Sprite to the stage, and add it as a listener to Ticker to get updates each frame.
+
+	   stage.addChild(npc);
+	   stage.addChild(player);
+			//stage.addEventListener("stagemousedown", handleAttack);
+	        
+	    createjs.Ticker.timingMode = createjs.Ticker.RAF;
+			createjs.Ticker.addEventListener("tick", tick);
+	        
+		}
+		init();
 }
 
- function handleComplete(evt) {
-        
-		// Define a spritesheet. Note that this data was exported by Zoë.
-		var spriteSheet = new createjs.SpriteSheet({
-				framerate: 7,
-				"images": [loader.getResult("player")],
-				"frames":{
-					//original w:250 h:125
-				    "width": 250,
-				    "regY": 1,
-				    "height": 125,
-				    "regX": -1,
-				    "count": 27
-				},
-				//count 188 is how many moves are on each sprite page
-				// define two animations, run (loops, 1.5x speed) and jump (returns to run):
-			//Levi is my character's name	
-      "animations":{
-
-
-      				// "Ready": [0, 1, "Ready"],
-
-				    "Melee": [2, 3, "Ready"],
-				    "Damage": [24, 25, "Ready"],
-				    "Running": [0, 1, "LeviRunCycle"],
-				    "LeviRunCycle": [0, 1, "LeviRunCycle"],
-				    "LeviWalk": [0, 1, "LeviWalkCycle"],
-				    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
-				    "Tired": [24, 26],
-				    "Miss": [18, 19, "Ready"],
-				    "Dodge": [18, 19, "Ready"],
-				    "Ready": [0, 1, "Ready"],
-            "TakeHit": [23, 24, "Damage"],
-            "Parry": [16, 17, "Dodge"]
-				}
-			});
-
-		// Define a spritesheet. Note that this data was exported by Zoë.
-		var spriteSheet1 = new createjs.SpriteSheet({
-				framerate: 7,
-				"images": [loader.getResult("cpu1")],
-				"frames":{
-				    "width": 250,
-				    "regY": 1,
-				    "height": 125,
-				    "regX": -1,
-				    "count": 27
-				},
-				//count 188 is how many moves are on each sprite page
-				// define two animations, run (loops, 1.5x speed) and jump (returns to run):
-			//Levi is my character's name	
-      "animations":{
-
-
-      				// "Ready": [0, 1, "Ready"],
-
-				    "Melee": [2, 3, "Ready"],
-				    "Damage": [24, 25, "Ready"],
-				    "Running": [0, 1, "LeviRunCycle"],
-				    "LeviRunCycle": [0, 1, "LeviRunCycle"],
-				    "LeviWalk": [0, 1, "LeviWalkCycle"],
-				    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
-				    "Tired": [24, 26],
-				    "Miss": [18, 19, "Ready"],
-				    "Dodge": [18, 19, "Ready"],
-				    "Ready": [0, 1, "Ready"],
-            "TakeHit": [23, 24, "Damage"],
-            "Parry": [16, 17, "Dodge"]
-				}
-			});
-		var spriteSheet2 = new createjs.SpriteSheet({
-				framerate: 7,
-				"images": [loader.getResult("cpu2")],
-				"frames":{
-				    "width": 250,
-				    "regY": 1,
-				    "height": 125,
-				    "regX": -1,
-				    "count": 27
-				},
-				//count 188 is how many moves are on each sprite page
-				// define two animations, run (loops, 1.5x speed) and jump (returns to run):
-			//Levi is my character's name	
-      "animations":{
-
-
-      				// "Ready": [0, 1, "Ready"],
-
-				    "Melee": [2, 3, "Ready"],
-				    "Damage": [24, 25, "Ready"],
-				    "Running": [0, 1, "LeviRunCycle"],
-				    "LeviRunCycle": [0, 1, "LeviRunCycle"],
-				    "LeviWalk": [0, 1, "LeviWalkCycle"],
-				    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
-				    "Tired": [24, 26],
-				    "Miss": [18, 19, "Ready"],
-				    "Dodge": [18, 19, "Ready"],
-				    "Ready": [0, 1, "Ready"],
-            "TakeHit": [23, 24, "Damage"],
-            "Parry": [16, 17, "Dodge"]
-				}
-			});
-		var spriteSheet3 = new createjs.SpriteSheet({
-				framerate: 7,
-				"images": [loader.getResult("cpu3")],
-				"frames":{
-				    "width": 250,
-				    "regY": 1,
-				    "height": 125,
-				    "regX": -1,
-				    "count": 27
-				},
-				//count 188 is how many moves are on each sprite page
-				// define two animations, run (loops, 1.5x speed) and jump (returns to run):
-			//Levi is my character's name	
-      "animations":{
-
-
-      				// "Ready": [0, 1, "Ready"],
-
-				    "Melee": [2, 3, "Ready"],
-				    "Damage": [24, 25, "Ready"],
-				    "Running": [0, 1, "LeviRunCycle"],
-				    "LeviRunCycle": [0, 1, "LeviRunCycle"],
-				    "LeviWalk": [0, 1, "LeviWalkCycle"],
-				    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
-				    "Tired": [24, 26],
-				    "Miss": [18, 19, "Ready"],
-				    "Dodge": [18, 19, "Ready"],
-				    "Ready": [0, 1, "Ready"],
-            "TakeHit": [23, 24, "Damage"],
-            "Parry": [16, 17, "Dodge"]
-				}
-			});
-		var spriteSheet4 = new createjs.SpriteSheet({
-				framerate: 7,
-				"images": [loader.getResult("cpu4")],
-				"frames":{
-				    "width": 250,
-				    "regY": 1,
-				    "height": 125,
-				    "regX": -1,
-				    "count": 27
-				},
-				//count 188 is how many moves are on each sprite page
-				// define two animations, run (loops, 1.5x speed) and jump (returns to run):
-			//Levi is my character's name	
-      "animations":{
-
-
-      				// "Ready": [0, 1, "Ready"],
-
-				    "Melee": [2, 3, "Ready"],
-				    "Damage": [24, 25, "Ready"],
-				    "Running": [0, 1, "LeviRunCycle"],
-				    "LeviRunCycle": [0, 1, "LeviRunCycle"],
-				    "LeviWalk": [0, 1, "LeviWalkCycle"],
-				    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
-				    "Tired": [24, 26],
-				    "Miss": [18, 19, "Ready"],
-				    "Dodge": [18, 19, "Ready"],
-				    "Ready": [0, 1, "Ready"],
-            "TakeHit": [23, 24, "Damage"],
-            "Parry": [16, 17, "Dodge"]
-				}
-			});
-		var spriteSheet5 = new createjs.SpriteSheet({
-				framerate: 7,
-				"images": [loader.getResult("cpu5")],
-				"frames":{
-				    "width": 250,
-				    "regY": 1,
-				    "height": 125,
-				    "regX": -1,
-				    "count": 27
-				},
-				//count 188 is how many moves are on each sprite page
-				// define two animations, run (loops, 1.5x speed) and jump (returns to run):
-			//Levi is my character's name	
-      "animations":{
-
-
-      				// "Ready": [0, 1, "Ready"],
-
-				    "Melee": [2, 3, "Ready"],
-				    "Damage": [24, 25, "Ready"],
-				    "Running": [0, 1, "LeviRunCycle"],
-				    "LeviRunCycle": [0, 1, "LeviRunCycle"],
-				    "LeviWalk": [0, 1, "LeviWalkCycle"],
-				    "LeviWalkCycle": [0, 1, "LeviWalkCycle"],
-				    "Tired": [24, 26],
-				    "Miss": [18, 19, "Ready"],
-				    "Dodge": [18, 19, "Ready"],
-				    "Ready": [0, 1, "Ready"],
-            "TakeHit": [23, 24, "Damage"],
-            "Parry": [16, 17, "Dodge"]
-				}
-			});
-
-		player = new createjs.Sprite(spriteSheet, "Ready");
-		player.x = 150;
-		player.y = 225;
-   
-   npc = new createjs.Sprite(spriteSheet2, "Ready");
-   npc.x =625;
-   npc.y = 175;
-   npc.scaleX *= -1;
-
-		// Add Sprite to the stage, and add it as a listener to Ticker to get updates each frame.
-
-   stage.addChild(npc);
-   stage.addChild(player);
-		//stage.addEventListener("stagemousedown", handleAttack);
-        
-    createjs.Ticker.timingMode = createjs.Ticker.RAF;
-		createjs.Ticker.addEventListener("tick", tick);
-        
-	}
 //===ENGINE=========================//
 function tick(event){
   
@@ -348,14 +357,31 @@ function handleKeyDown(e){
           if(determineHit(player1, enemy1)){
             npc.gotoAndPlay("TakeHit");
             playpunch();
-            var damage = Math.ceil(Math.random() * 6);
-            createText(damage.toString(), "#990000", npc);
-            damageHP(enemy1, damage);
+            var damage1 = Math.ceil(Math.random() * 6);
+            createText(damage1.toString(), "#990000", npc);
+            damageHP(enemy1, damage1);
           }else{
-            player.gotoAndPlay("Miss");
-            npc.gotoAndPlay("Parry");
-            //Creates textd
-            createText("Miss", "#3498db", player);
+          	var attackornot = Math.floor(Math.random() * (2) + 0);
+          	console.log(attackornot);
+          	player.gotoAndPlay("Miss");
+          	npc.gotoAndPlay("Parry");
+          	if (attackornot=0){
+          		createText("Miss", "#3498db", player);
+          		// player.gotoAndPlay("Miss");
+            // 	npc.gotoAndPlay("Parry");
+          	}else{
+          		// player.gotoAndPlay("Miss");
+            // npc.gotoAndPlay("Parry");
+            npc.gotoAndPlay("Melee");
+            playpunch();
+            var damage2 = Math.ceil(Math.random()*4)
+            createText(damage2.toString(), "#990000", player);
+            damageHPP(player1, damage2);
+          	}
+            // player.gotoAndPlay("Miss");
+            // npc.gotoAndPlay("Parry");
+            // //Creates textd
+            // createText("Miss", "#3498db", player);
           }
           
         } 
@@ -559,18 +585,78 @@ function updateText(textArray) {
 //=========//
 
 function damageHP(target, damage){
+// 	console.log(target);
+// if(target.name="Kahoona"){
+	console.log(target.name);
   if(target.hp - damage < 0){
     //dead
     target.hp = 0;
     document.getElementById("enemy1_hp").innerHTML = "KOed";
     createjs.Tween.get(npc) //change NPC
-            .to({alpha:0, visible:true}, 1000)
+            .to({alpha:0, visible:false}, 1000)
             .call(handleComplete);
     function handleComplete(){
-    	stage.removeChild(npc);
+        stage.removeChild(npc);
     }
+    nextRound(player1, enemy1);
+    // GameSet();
+    
   }else{
     target.hp -= damage;
     document.getElementById("enemy1_hp").innerHTML = "HP " + target.hp;
   }
+
 }
+
+  function damageHPP(target, damage){
+// 	console.log(target);
+// if(target.name="Kahoona"){
+	console.log(target.name);
+  if(target.hp - damage < 0){
+    //dead
+    target.hp = 0;
+    document.getElementById("player1_hp").innerHTML = "KOed";
+    createjs.Tween.get(player) //change NPC
+            .to({alpha:0, visible:false}, 1000)
+            .call(handleComplete);
+    function handleComplete(){
+        stage.removeChild(player);
+    }
+    nextRound(player1, enemy1);
+    // GameSet();
+    
+  }else{
+    target.hp -= damage;
+    document.getElementById("player1_hp").innerHTML = "HP " + target.hp;
+  }
+
+// }else /*if(target=player1)*/ {
+// 	console.log(target.name);
+// 	if(target.hp - damage < 0){
+//     //dead
+//     target.hp = 0;
+//     document.getElementById("enemy1_hp").innerHTML = "KOed";
+//     createjs.Tween.get(npc) //change NPC
+//             .to({alpha:0, visible:false}, 1000)
+//             .call(handleComplete);
+//     function handleComplete(){
+//         stage.removeChild(npc);
+//     }
+    
+//   }else{
+//     target.hp -= damage;
+//     document.getElementById("enemy1_hp").innerHTML = "HP " + target.hp;
+//   }
+
+// }
+}
+
+function nextRound(player, enemy){
+	player.end ++;
+	enemy.level ++;
+	initiateCharacter(player1, "player1_hp", "player1_stats");
+	initiateCharacter(enemy1, "enemy1_hp", "enemy1_stats");
+	GameSet();
+
+}
+// nextRound(player1, enemy1);

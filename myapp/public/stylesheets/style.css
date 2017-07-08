@@ -3,14 +3,17 @@
 @import url(https://fonts.googleapis.com/css?family=VT323);
 
 body{
+  background-image: url("../assets/stadium-floodlights-background.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
   background-color: #988;
   padding: 1em;
   transition: all 2s;
-  font-family: "Roboto";
+  font-family: "Holtwood One SC", serif;
   color: #ccc;
 }
 h1{ 
-  font-family: "Shadows Into Light", san-serif;
+  font-family: "Holtwood One SC", serif;
   color: white;
   font-size: 4em;
   text-rendering: optimizeLegibility;
@@ -57,6 +60,6 @@ h2{
   padding-left: 5em;
 }
 #testCanvas{
-    background-image: url("/images/BoxingRingNoLogo.png");
+    background-image: url("../assets/BoxingRingNoLogo.png");
     background-color: #cccccc;
 }

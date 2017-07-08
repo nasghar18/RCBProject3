@@ -2,35 +2,41 @@ doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
-    title FightNight
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title Fight Night: BCE
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Holtwood+One+SC')
+    link(rel='stylesheet', href='css/boxing.css')
     script(src='https://code.createjs.com/easeljs-0.8.2.min.js')
     script(src='https://code.createjs.com/tweenjs-0.6.2.min.js')
     script(src='https://code.createjs.com/preloadjs-0.6.1.min.js')
-  body(onload='init();', tabindex='0')
+  body(tabindex='0')
+    audio(autoplay='')
+      source(src='../assets/ready_to_rumble_music.mp3', type='audio/mpeg')
     // For Easel.js
     #title.flexRow
       h1.insetShadow
-        | Fight Night
+        | Fight Night: Bootcamp Edition
         h1
     // Content area
     .flexRow
       .statsLeft
-        h3 Kahoona
+        h3 Kevin
         p#player1_hp HP 30
         p#player1_stats
       div
         canvas#testCanvas(width='800', height='500')
       .statsRight
-        h3 Enemy1
+        h3 Boxer 2
         p#enemy1_hp HP 30
         p#enemy1_stats
     // Instructions
     .center.getFocus
-      .btn(onclick="document.body.style.background = '#222'; getElementById('getFocus').style.display = 'none'; getElementById('title').style.display = 'none';")
+      #startbtn.btn(onclick=" play(); document.body.style.background = '#222'; getElementById('getFocus').style.display = 'none'; getElementById('title').style.display = 'none'; GameSet();")
+        audio#audio(loop='loop', src='../assets/rocky_theme.mp3')
+        audio#punchAudio
+          source(src='../assets/boxing_punch1.mp3', type='audio/mpeg')
         h2#getFocus Start
       p
         | W A S D or Arrow Keys to move |
         b Spacebar
         |  to attack
-    script(src='/javascripts/boxing.js')
+    script(src='logic/boxing.js')
