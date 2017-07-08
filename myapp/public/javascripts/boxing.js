@@ -4,16 +4,25 @@ var npc;
 var playerDirection = "RIGHT";
 var playerSTATE = "IDLE"; //
 // var randChar = ["assets/Boxer_Sprite_2_edited.png", "assets/Boxer_Sprite_3_edited.png", "assets/Boxer_Sprite_4_edited.png", "assets/Boxer_Sprite_5_edited.png", "assets/Boxer_Sprite_6_edited.png"]
-var spriteSheetKahoona="assets/Boxer_Sprite_Sheet_1_edited.png";
+var spriteSheetKahoona="../images/Boxer_Sprite_Sheet_1_edited.png";
 // var spriteSheetNinja = randChar[Math.floor( Math.random() * (4-0) + 0 )];
-var spriteSheetNinja1="assets/Boxer_Sprite_2_edited.png";
-var spriteSheetNinja2="assets/Boxer_Sprite_3_edited.png";
-var spriteSheetNinja3="assets/Boxer_Sprite_4_edited.png";
-var spriteSheetNinja4="assets/Boxer_Sprite_5_edited.png";
-var spriteSheetNinja5="assets/Boxer_Sprite_6_edited.png";
+var spriteSheetNinja1="../images/Boxer_Sprite_2_edited.png";
+var spriteSheetNinja2="../images/Boxer_Sprite_3_edited.png";
+var spriteSheetNinja3="../images/Boxer_Sprite_4_edited.png";
+var spriteSheetNinja4="../images/Boxer_Sprite_5_edited.png";
+var spriteSheetNinja5="../images/Boxer_Sprite_6_edited.png";
 
 //Holds the display text
 var displayTextArray = [];
+
+function play(){
+       var audio = document.getElementById("audio");
+       audio.play();
+               }
+function playpunch(){
+	var audio = document.getElementById("punchAudio");
+	audio.play();
+}
 
 
 function init() {
@@ -338,6 +347,7 @@ function handleKeyDown(e){
         if(xDistance < 300){
           if(determineHit(player1, enemy1)){
             npc.gotoAndPlay("TakeHit");
+            playpunch();
             var damage = Math.ceil(Math.random() * 6);
             createText(damage.toString(), "#990000", npc);
             damageHP(enemy1, damage);
